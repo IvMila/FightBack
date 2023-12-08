@@ -1181,7 +1181,7 @@ MonoBehaviour:
   _speedRotatiion: 20
   _agroRadius: 20
   _stickmanHealthMax: 100
-  _damage: 10
+  _damage: 5
 --- !u!95 &1286501391888581446
 Animator:
   serializedVersion: 5
@@ -1217,7 +1217,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1286501391888581440
 CapsuleCollider:

@@ -95,7 +95,8 @@ namespace TestTask.Gameplay
 
         public void AddCoins(int count)
         {
-            _coin += count;
+            _coin = PlayerPrefs.GetInt("coin");
+            PlayerPrefs.SetInt("coin", count + _coin);
 
             UIController.Instance.GetScreen<GameUI>().SetCoin(_coin);
         }
