@@ -1177,7 +1177,7 @@ MonoBehaviour:
   _hpBehaviour: {fileID: 7022675092898192469}
   _bloodParticle: {fileID: 2171418799643140794, guid: f5457a2c9506b47909f21b623e77faac, type: 3}
   _walkSpeed: 0.1
-  _runSpeed: 5
+  _runSpeed: 8
   _speedRotatiion: 20
   _agroRadius: 20
   _stickmanHealthMax: 100

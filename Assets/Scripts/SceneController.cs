@@ -28,7 +28,8 @@ namespace TestTask.Gameplay
 
         private CarBehaviour _player;
 
-        private int _coin;
+        private int _currentCoin;
+        private int _coinsPerGame;
 
         private int _currentLevel = 1;
         private int _upLevel = 1;
@@ -41,8 +42,10 @@ namespace TestTask.Gameplay
 
             _player.OnDie += Defeat;
             _cameras.SetCameraTarget(_player.transform);
+            _currentCoin = PlayerPrefs.GetInt("coin");
             _currentLevel = PlayerPrefs.GetInt("upLevel");
 
+            _coinsPerGame = 0;
         }
 
         private void Start()
@@ -50,10 +53,6 @@ namespace TestTask.Gameplay
             StartCoroutine(GameSequence());
         }
 
-        private void Update()
-        {
-
-        }
         private IEnumerator GameSequence()
         {
             Time.timeScale = 0;
@@ -68,6 +67,8 @@ namespace TestTask.Gameplay
             _cameras.EnableGameCamera();
 
             UIController.Instance.GetScreen<GameUI>().SetLevel(_currentLevel);
+
+            UIController.Instance.GetScreen<GameUI>().SetCoin(_currentCoin);
 
             Time.timeScale = 1;
 
@@ -95,10 +96,10 @@ namespace TestTask.Gameplay
 
         public void AddCoins(int count)
         {
-            _coin = PlayerPrefs.GetInt("coin");
-            PlayerPrefs.SetInt("coin", count + _coin);
-
-            UIController.Instance.GetScreen<GameUI>().SetCoin(_coin);
+            _currentCoin = PlayerPrefs.GetInt("coin");
+            PlayerPrefs.SetInt("coin", count + _currentCoin);
+            _coinsPerGame += count;
+            UIController.Instance.GetScreen<GameUI>().SetCoin(_currentCoin);
         }
 
         public void LastLevel()
@@ -112,7 +113,7 @@ namespace TestTask.Gameplay
         {
             _player.StopMove();
 
-            UIController.Instance.ShowScreen<FailedUI>().SetCoin(_coin);
+            UIController.Instance.ShowScreen<FailedUI>().SetCoin(_coinsPerGame);
 
             GameOver();
 
@@ -123,7 +124,7 @@ namespace TestTask.Gameplay
         {
             _player.StopMove();
 
-            UIController.Instance.ShowScreen<VictoryUI>().SetCoin(_coin);
+            UIController.Instance.ShowScreen<VictoryUI>().SetCoin(_coinsPerGame);
 
             GameOver();
 
